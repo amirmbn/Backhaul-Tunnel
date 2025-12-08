@@ -58,24 +58,126 @@ OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 DOWNLOAD_URL=""
 DOWNLOADED_FILENAME=""
 
+# Function to install curl if not available
+install_curl_if_needed() {
+    if ! command -v curl &> /dev/null; then
+        echo "curl not found. Attempting to install..."
+        
+        # Detect package manager and install curl
+        if command -v apt-get &> /dev/null; then
+            # Debian/Ubuntu
+            apt-get update && apt-get install -y curl
+        elif command -v yum &> /dev/null; then
+            # RHEL/CentOS
+            yum install -y curl
+        elif command -v dnf &> /dev/null; then
+            # Fedora
+            dnf install -y curl
+        elif command -v apk &> /dev/null; then
+            # Alpine
+            apk add curl
+        elif command -v pacman &> /dev/null; then
+            # Arch Linux
+            pacman -Sy --noconfirm curl
+        elif command -v zypper &> /dev/null; then
+            # openSUSE
+            zypper install -y curl
+        else
+            echo "Error: Could not detect package manager to install curl."
+            echo "Please install curl manually and run the script again."
+            exit 1
+        fi
+        
+        # Verify installation
+        if command -v curl &> /dev/null; then
+            echo "curl installed successfully."
+        else
+            echo "Failed to install curl. Trying wget instead..."
+        fi
+    fi
+}
+
+# Function to install wget if not available
+install_wget_if_needed() {
+    if ! command -v wget &> /dev/null; then
+        echo "wget not found. Attempting to install..."
+        
+        # Detect package manager and install wget
+        if command -v apt-get &> /dev/null; then
+            # Debian/Ubuntu
+            apt-get update && apt-get install -y wget
+        elif command -v yum &> /dev/null; then
+            # RHEL/CentOS
+            yum install -y wget
+        elif command -v dnf &> /dev/null; then
+            # Fedora
+            dnf install -y wget
+        elif command -v apk &> /dev/null; then
+            # Alpine
+            apk add wget
+        elif command -v pacman &> /dev/null; then
+            # Arch Linux
+            pacman -Sy --noconfirm wget
+        elif command -v zypper &> /dev/null; then
+            # openSUSE
+            zypper install -y wget
+        else
+            echo "Error: Could not detect package manager to install wget."
+            echo "Please install wget manually and run the script again."
+            exit 1
+        fi
+        
+        # Verify installation
+        if command -v wget &> /dev/null; then
+            echo "wget installed successfully."
+        else
+            echo "Failed to install wget."
+        fi
+    fi
+}
+
+# Ensure at least one download tool is available
+install_curl_if_needed
+if ! command -v curl &> /dev/null; then
+    install_wget_if_needed
+fi
+
+# Check if any download tool is available
+if ! command -v curl &> /dev/null && ! command -v wget &> /dev/null; then
+    echo "Error: Neither curl nor wget is available and could not be installed."
+    echo "Please install one of them manually and run the script again."
+    exit 1
+fi
+
 # Function to get latest version from GitHub API with fallback
 get_latest_version() {
     local version
-    # Try using curl
+    
+    # Try using curl first
     if command -v curl &> /dev/null; then
-        version=$(curl -s https://api.github.com/repos/amirmbn/Backhaul-Installer/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
-    # Try using wget if curl is not available
+        echo "Using curl to fetch latest version..."
+        version=$(curl -s --connect-timeout 10 --retry 3 https://api.github.com/repos/amirmbn/Backhaul-Installer/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
+    # Fallback to wget
     elif command -v wget &> /dev/null; then
-        version=$(wget -qO- https://api.github.com/repos/amirmbn/Backhaul-Installer/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
-    else
-        echo "Warning: Neither curl nor wget found. Using fallback method."
-        # Try a simpler approach
-        version=$(echo "0.6.5") # Fallback to known version
+        echo "Using wget to fetch latest version..."
+        version=$(wget -qO- --timeout=10 --tries=3 https://api.github.com/repos/amirmbn/Backhaul-Installer/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
     fi
     
+    # Validate version format
     if [ -z "$version" ] || [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-        echo "Warning: Could not fetch latest version. Using fallback version 0.6.5"
-        version="0.6.5"
+        echo "Warning: Could not fetch latest version. Using fallback method..."
+        # Try alternative method - scrape from releases page
+        if command -v curl &> /dev/null; then
+            version=$(curl -s https://github.com/amirmbn/Backhaul-Installer/releases | grep -oE 'releases/tag/v[0-9]+\.[0-9]+\.[0-9]+' | head -1 | sed 's/releases\/tag\/v//')
+        elif command -v wget &> /dev/null; then
+            version=$(wget -qO- https://github.com/amirmbn/Backhaul-Installer/releases | grep -oE 'releases/tag/v[0-9]+\.[0-9]+\.[0-9]+' | head -1 | sed 's/releases\/tag\/v//')
+        fi
+        
+        # Final fallback
+        if [ -z "$version" ] || [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Warning: Could not determine latest version. Using fallback version 0.6.5"
+            version="0.6.5"
+        fi
     fi
     
     echo "$version"
@@ -145,13 +247,15 @@ DOWNLOAD_PATH="/tmp/$DOWNLOADED_FILENAME"
 if [ -n "$DOWNLOAD_URL" ]; then
     echo "Downloading $DOWNLOADED_FILENAME..."
     
-    # Check if wget or curl is available
-    if command -v wget &> /dev/null; then
-        wget -q --show-progress -O "$DOWNLOAD_PATH" "$DOWNLOAD_URL"
-    elif command -v curl &> /dev/null; then
-        curl -L --progress-bar -o "$DOWNLOAD_PATH" "$DOWNLOAD_URL"
+    # Check download tool availability and use the best option
+    if command -v curl &> /dev/null; then
+        echo "Using curl for download..."
+        curl -L --progress-bar --connect-timeout 30 --retry 3 -o "$DOWNLOAD_PATH" "$DOWNLOAD_URL"
+    elif command -v wget &> /dev/null; then
+        echo "Using wget for download..."
+        wget -q --show-progress --timeout=30 --tries=3 -O "$DOWNLOAD_PATH" "$DOWNLOAD_URL"
     else
-        echo "Error: Neither wget nor curl is available. Please install one of them."
+        echo "Error: No download tool available. This should not happen."
         exit 1
     fi
     
