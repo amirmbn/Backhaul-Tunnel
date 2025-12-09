@@ -1,8 +1,5 @@
 # Backhaul Installer
 
-<br>
-TCP Configuration > Enable<br>
-TCP Multiplexing Configuration > Enable
 <br><br>
 
 <div align="right">
