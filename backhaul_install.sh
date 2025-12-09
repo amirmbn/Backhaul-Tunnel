@@ -134,8 +134,9 @@ echo "4. WebSocket"
 echo "5. Secure WebSocket"
 echo "6. WS Multiplexing"
 echo "7. WSS Multiplexing"
+echo ""
 
-read -rp "Please enter the number of your desired option: " transport_choice
+read -rp "Please enter the number: " transport_choice
 
 TRANSPORT=""
 case $transport_choice in
