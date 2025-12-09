@@ -26,6 +26,22 @@ get_boolean_input() {
     done
 }
 
+# Function to get port only and create full bind address
+get_bind_addr_from_port() {
+    local prompt="$1"
+    local default_port="$2"
+    local port
+    while true; do
+        port=$(get_input_with_default "$prompt" "$default_port")
+        if [[ "$port" =~ ^[0-9]+$ ]] && (( port >= 1 && port <= 65535 )); then
+            echo "0.0.0.0:$port"
+            break
+        else
+            echo "Invalid input. Please enter a valid port number (1-65535)."
+        fi
+    done
+}
+
 # Function to get port input
 get_port_input() {
     local prompt="$1"
