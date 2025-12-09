@@ -152,9 +152,9 @@ esac
 echo "---"
 
 clear # Clear screen before mode selection
-echo "Select Mode (Server or Client):"
-echo "1. Server"
-echo "2. Client"
+echo "Select Mode (IRAN or OutSide):"
+echo "1. IRAN"
+echo "2. OutSide"
 
 read -rp "Please enter the number of your desired option: " mode_choice
 
