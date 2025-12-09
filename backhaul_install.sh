@@ -193,7 +193,7 @@ if [[ "$MODE" == "server" ]]; then
             echo "channel_size = $CHANNEL_SIZE" >> "$CONFIG_FILE"
             SNIFFER=$(get_boolean_input "Enable Sniffer? (true/false)" "false")
             echo "sniffer = $SNIFFER" >> "$CONFIG_FILE"
-            WEB_PORT=$(get_input_with_default "Web Port (web_port)" "2060")
+            WEB_PORT=$(get_input_with_default "Web Port (Set to 0 to Disable)" "Default 2060")
             echo "web_port = $WEB_PORT" >> "$CONFIG_FILE"
             SNIFFER_LOG=$(get_input_with_default "Sniffer Log File Path (sniffer_log)" "/root/backhaul.json")
             echo "sniffer_log = \"$SNIFFER_LOG\"" >> "$CONFIG_FILE"
@@ -228,7 +228,7 @@ if [[ "$MODE" == "server" ]]; then
             echo "mux_streambuffer = $MUX_STREAMBUFFER" >> "$CONFIG_FILE"
             SNIFFER=$(get_boolean_input "Enable Sniffer? (true/false)" "false")
             echo "sniffer = $SNIFFER" >> "$CONFIG_FILE"
-            WEB_PORT=$(get_input_with_default "Web Port (web_port)" "2060")
+            WEB_PORT=$(get_input_with_default "Web Port (Set to 0 to Disable)" "Default 2060")
             echo "web_port = $WEB_PORT" >> "$CONFIG_FILE"
             SNIFFER_LOG=$(get_input_with_default "Sniffer Log File Path (sniffer_log)" "/root/backhaul.json")
             echo "sniffer_log = \"$SNIFFER_LOG\"" >> "$CONFIG_FILE"
@@ -249,7 +249,7 @@ if [[ "$MODE" == "server" ]]; then
             echo "channel_size = $CHANNEL_SIZE" >> "$CONFIG_FILE"
             SNIFFER=$(get_boolean_input "Enable Sniffer? (true/false)" "false")
             echo "sniffer = $SNIFFER" >> "$CONFIG_FILE"
-            WEB_PORT=$(get_input_with_default "Web Port (web_port)" "2060")
+            WEB_PORT=$(get_input_with_default "Web Port (Set to 0 to Disable)" "Default 2060")
             echo "web_port = $WEB_PORT" >> "$CONFIG_FILE"
             SNIFFER_LOG=$(get_input_with_default "Sniffer Log File Path (sniffer_log)" "/root/backhaul.json")
             echo "sniffer_log = \"$SNIFFER_LOG\"" >> "$CONFIG_FILE"
@@ -274,7 +274,7 @@ if [[ "$MODE" == "server" ]]; then
             echo "nodelay = $NODELAY" >> "$CONFIG_FILE"
             SNIFFER=$(get_boolean_input "Enable Sniffer? (true/false)" "false")
             echo "sniffer = $SNIFFER" >> "$CONFIG_FILE"
-            WEB_PORT=$(get_input_with_default "Web Port (web_port)" "2060")
+            WEB_PORT=$(get_input_with_default "Web Port (Set to 0 to Disable)" "Default 2060")
             echo "web_port = $WEB_PORT" >> "$CONFIG_FILE"
             SNIFFER_LOG=$(get_input_with_default "Sniffer Log File Path (sniffer_log)" "/root/backhaul.json")
             echo "sniffer_log = \"$SNIFFER_LOG\"" >> "$CONFIG_FILE"
@@ -301,7 +301,7 @@ if [[ "$MODE" == "server" ]]; then
             echo "tls_key = \"$TLS_KEY\"" >> "$CONFIG_FILE"
             SNIFFER=$(get_boolean_input "Enable Sniffer? (true/false)" "false")
             echo "sniffer = $SNIFFER" >> "$CONFIG_FILE"
-            WEB_PORT=$(get_input_with_default "Web Port (web_port)" "2060")
+            WEB_PORT=$(get_input_with_default "Web Port (Set to 0 to Disable)" "Default 2060")
             echo "web_port = $WEB_PORT" >> "$CONFIG_FILE"
             SNIFFER_LOG=$(get_input_with_default "Sniffer Log File Path (sniffer_log)" "/root/backhaul.json")
             echo "sniffer_log = \"$SNIFFER_LOG\"" >> "$CONFIG_FILE"
@@ -336,7 +336,7 @@ if [[ "$MODE" == "server" ]]; then
             echo "mux_streambuffer = $MUX_STREAMBUFFER" >> "$CONFIG_FILE"
             SNIFFER=$(get_boolean_input "Enable Sniffer? (true/false)" "false")
             echo "sniffer = $SNIFFER" >> "$CONFIG_FILE"
-            WEB_PORT=$(get_input_with_default "Web Port (web_port)" "2060")
+            WEB_PORT=$(get_input_with_default "Web Port (Set to 0 to Disable)" "Default 2060")
             echo "web_port = $WEB_PORT" >> "$CONFIG_FILE"
             SNIFFER_LOG=$(get_input_with_default "Sniffer Log File Path (sniffer_log)" "/root/backhaul.json")
             echo "sniffer_log = \"$SNIFFER_LOG\"" >> "$CONFIG_FILE"
@@ -375,7 +375,7 @@ if [[ "$MODE" == "server" ]]; then
             echo "tls_key = \"$TLS_KEY\"" >> "$CONFIG_FILE"
             SNIFFER=$(get_boolean_input "Enable Sniffer? (true/false)" "false")
             echo "sniffer = $SNIFFER" >> "$CONFIG_FILE"
-            WEB_PORT=$(get_input_with_default "Web Port (web_port)" "2060")
+            WEB_PORT=$(get_input_with_default "Web Port (Set to 0 to Disable)" "Default 2060")
             echo "web_port = $WEB_PORT" >> "$CONFIG_FILE"
             SNIFFER_LOG=$(get_input_with_default "Sniffer Log File Path (sniffer_log)" "/root/backhaul.json")
             echo "sniffer_log = \"$SNIFFER_LOG\"" >> "$CONFIG_FILE"
@@ -411,7 +411,7 @@ elif [[ "$MODE" == "client" ]]; then
             echo "nodelay = $NODELAY" >> "$CONFIG_FILE"
             SNIFFER=$(get_boolean_input "Enable Sniffer? (true/false)" "false")
             echo "sniffer = $SNIFFER" >> "$CONFIG_FILE"
-            WEB_PORT=$(get_input_with_default "Web Port (web_port)" "2060")
+            WEB_PORT=$(get_input_with_default "Web Port (Set to 0 to Disable)" "Default 2060")
             echo "web_port = $WEB_PORT" >> "$CONFIG_FILE"
             SNIFFER_LOG=$(get_input_with_default "Sniffer Log File Path (sniffer_log)" "/root/backhaul.json")
             echo "sniffer_log = \"$SNIFFER_LOG\"" >> "$CONFIG_FILE"
@@ -446,7 +446,7 @@ elif [[ "$MODE" == "client" ]]; then
             echo "mux_streambuffer = $MUX_STREAMBUFFER" >> "$CONFIG_FILE"
             SNIFFER=$(get_boolean_input "Enable Sniffer? (true/false)" "false")
             echo "sniffer = $SNIFFER" >> "$CONFIG_FILE"
-            WEB_PORT=$(get_input_with_default "Web Port (web_port)" "2060")
+            WEB_PORT=$(get_input_with_default "Web Port (Set to 0 to Disable)" "Default 2060")
             echo "web_port = $WEB_PORT" >> "$CONFIG_FILE"
             SNIFFER_LOG=$(get_input_with_default "Sniffer Log File Path (sniffer_log)" "/root/backhaul.json")
             echo "sniffer_log = \"$SNIFFER_LOG\"" >> "$CONFIG_FILE"
@@ -467,7 +467,7 @@ elif [[ "$MODE" == "client" ]]; then
             echo "retry_interval = $RETRY_INTERVAL" >> "$CONFIG_FILE"
             SNIFFER=$(get_boolean_input "Enable Sniffer? (true/false)" "false")
             echo "sniffer = $SNIFFER" >> "$CONFIG_FILE"
-            WEB_PORT=$(get_input_with_default "Web Port (web_port)" "2060")
+            WEB_PORT=$(get_input_with_default "Web Port (Set to 0 to Disable)" "Default 2060")
             echo "web_port = $WEB_PORT" >> "$CONFIG_FILE"
             SNIFFER_LOG=$(get_input_with_default "Sniffer Log File Path (sniffer_log)" "/root/backhaul.json")
             echo "sniffer_log = \"$SNIFFER_LOG\"" >> "$CONFIG_FILE"
@@ -496,7 +496,7 @@ elif [[ "$MODE" == "client" ]]; then
             echo "nodelay = $NODELAY" >> "$CONFIG_FILE"
             SNIFFER=$(get_boolean_input "Enable Sniffer? (true/false)" "false")
             echo "sniffer = $SNIFFER" >> "$CONFIG_FILE"
-            WEB_PORT=$(get_input_with_default "Web Port (web_port)" "2060")
+            WEB_PORT=$(get_input_with_default "Web Port (Set to 0 to Disable)" "Default 2060")
             echo "web_port = $WEB_PORT" >> "$CONFIG_FILE"
             SNIFFER_LOG=$(get_input_with_default "Sniffer Log File Path (sniffer_log)" "/root/backhaul.json")
             echo "sniffer_log = \"$SNIFFER_LOG\"" >> "$CONFIG_FILE"
@@ -525,7 +525,7 @@ elif [[ "$MODE" == "client" ]]; then
             echo "nodelay = $NODELAY" >> "$CONFIG_FILE"
             SNIFFER=$(get_boolean_input "Enable Sniffer? (true/false)" "false")
             echo "sniffer = $SNIFFER" >> "$CONFIG_FILE"
-            WEB_PORT=$(get_input_with_default "Web Port (web_port)" "2060")
+            WEB_PORT=$(get_input_with_default "Web Port (Set to 0 to Disable)" "Default 2060")
             echo "web_port = $WEB_PORT" >> "$CONFIG_FILE"
             SNIFFER_LOG=$(get_input_with_default "Sniffer Log File Path (sniffer_log)" "/root/backhaul.json")
             echo "sniffer_log = \"$SNIFFER_LOG\"" >> "$CONFIG_FILE"
@@ -562,7 +562,7 @@ elif [[ "$MODE" == "client" ]]; then
             echo "mux_streambuffer = $MUX_STREAMBUFFER" >> "$CONFIG_FILE"
             SNIFFER=$(get_boolean_input "Enable Sniffer? (true/false)" "false")
             echo "sniffer = $SNIFFER" >> "$CONFIG_FILE"
-            WEB_PORT=$(get_input_with_default "Web Port (web_port)" "2060")
+            WEB_PORT=$(get_input_with_default "Web Port (Set to 0 to Disable)" "Default 2060")
             echo "web_port = $WEB_PORT" >> "$CONFIG_FILE"
             SNIFFER_LOG=$(get_input_with_default "Sniffer Log File Path (sniffer_log)" "/root/backhaul.json")
             echo "sniffer_log = \"$SNIFFER_LOG\"" >> "$CONFIG_FILE"
@@ -599,7 +599,7 @@ elif [[ "$MODE" == "client" ]]; then
             echo "mux_streambuffer = $MUX_STREAMBUFFER" >> "$CONFIG_FILE"
             SNIFFER=$(get_boolean_input "Enable Sniffer? (true/false)" "false")
             echo "sniffer = $SNIFFER" >> "$CONFIG_FILE"
-            WEB_PORT=$(get_input_with_default "Web Port (web_port)" "2060")
+            WEB_PORT=$(get_input_with_default "Web Port (Set to 0 to Disable)" "Default 2060")
             echo "web_port = $WEB_PORT" >> "$CONFIG_FILE"
             SNIFFER_LOG=$(get_input_with_default "Sniffer Log File Path (sniffer_log)" "/root/backhaul.json")
             echo "sniffer_log = \"$SNIFFER_LOG\"" >> "$CONFIG_FILE"
