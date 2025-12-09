@@ -155,8 +155,9 @@ clear # Clear screen before mode selection
 echo "Select Mode (IRAN or OutSide):"
 echo "1. IRAN"
 echo "2. OutSide"
+echo ""
 
-read -rp "Please enter the number of your desired option: " mode_choice
+read -rp "Please enter the number: " mode_choice
 
 MODE=""
 case $mode_choice in
