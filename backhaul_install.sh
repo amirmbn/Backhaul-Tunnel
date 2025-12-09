@@ -176,7 +176,7 @@ if [[ "$MODE" == "server" ]]; then
 
     case "$TRANSPORT" in
         "tcp")
-            BIND_ADDR=$(get_bind_addr_from_port "Enter bind port" "Default 3080")
+            BIND_ADDR=$(get_bind_addr_from_port "Enter Tunnel Port" "Default 3080")
             echo "bind_addr = \"$BIND_ADDR\"" >> "$CONFIG_FILE"
             echo "transport = \"$TRANSPORT\"" >> "$CONFIG_FILE"
             ACCEPT_UDP=$(get_boolean_input "Accept UDP? (true/false)" "false")
@@ -203,7 +203,7 @@ if [[ "$MODE" == "server" ]]; then
             echo "ports = $PORTS" >> "$CONFIG_FILE"
             ;;
         "tcpmux")
-            BIND_ADDR=$(get_bind_addr_from_port "Enter bind port" "Default 3080")
+            BIND_ADDR=$(get_bind_addr_from_port "Enter Tunnel Port" "Default 3080")
             echo "bind_addr = \"$BIND_ADDR\"" >> "$CONFIG_FILE"
             echo "transport = \"$TRANSPORT\"" >> "$CONFIG_FILE"
             TOKEN=$(get_input_with_default "Token (token)" "your_token")
@@ -238,7 +238,7 @@ if [[ "$MODE" == "server" ]]; then
             echo "ports = $PORTS" >> "$CONFIG_FILE"
             ;;
         "udp")
-            BIND_ADDR=$(get_bind_addr_from_port "Enter bind port" "Default 3080")
+            BIND_ADDR=$(get_bind_addr_from_port "Enter Tunnel Port" "Default 3080")
             echo "bind_addr = \"$BIND_ADDR\"" >> "$CONFIG_FILE"
             echo "transport = \"$TRANSPORT\"" >> "$CONFIG_FILE"
             TOKEN=$(get_input_with_default "Token (token)" "your_token")
@@ -259,7 +259,7 @@ if [[ "$MODE" == "server" ]]; then
             echo "ports = $PORTS" >> "$CONFIG_FILE"
             ;;
         "ws")
-            BIND_ADDR=$(get_bind_addr_from_port "Enter bind port" "Default 8080")
+            BIND_ADDR=$(get_bind_addr_from_port "Enter Tunnel Port" "Default 8080")
             echo "bind_addr = \"$BIND_ADDR\"" >> "$CONFIG_FILE"
             echo "transport = \"$TRANSPORT\"" >> "$CONFIG_FILE"
             TOKEN=$(get_input_with_default "Token (token)" "your_token")
@@ -284,7 +284,7 @@ if [[ "$MODE" == "server" ]]; then
             echo "ports = $PORTS" >> "$CONFIG_FILE"
             ;;
         "wss")
-            BIND_ADDR=$(get_bind_addr_from_port "Enter bind port" "Default 8443")
+            BIND_ADDR=$(get_bind_addr_from_port "Enter Tunnel Port" "Default 8443")
             echo "bind_addr = \"$BIND_ADDR\"" >> "$CONFIG_FILE"
             echo "transport = \"$TRANSPORT\"" >> "$CONFIG_FILE"
             TOKEN=$(get_input_with_default "Token (token)" "your_token")
@@ -311,7 +311,7 @@ if [[ "$MODE" == "server" ]]; then
             echo "ports = $PORTS" >> "$CONFIG_FILE"
             ;;
         "wsmux")
-            BIND_ADDR=$(get_bind_addr_from_port "Enter bind port" "Default 3080")
+            BIND_ADDR=$(get_bind_addr_from_port "Enter Tunnel Port" "Default 3080")
             echo "bind_addr = \"$BIND_ADDR\"" >> "$CONFIG_FILE"
             echo "transport = \"$TRANSPORT\"" >> "$CONFIG_FILE"
             TOKEN=$(get_input_with_default "Token (token)" "your_token")
@@ -346,7 +346,7 @@ if [[ "$MODE" == "server" ]]; then
             echo "ports = $PORTS" >> "$CONFIG_FILE"
             ;;
         "wssmux")
-            BIND_ADDR=$(get_bind_addr_from_port "Enter bind port" "Default 443")
+            BIND_ADDR=$(get_bind_addr_from_port "Enter Tunnel Port" "Default 443")
             echo "bind_addr = \"$BIND_ADDR\"" >> "$CONFIG_FILE"
             echo "transport = \"$TRANSPORT\"" >> "$CONFIG_FILE"
             TOKEN=$(get_input_with_default "Token (token)" "your_token")
