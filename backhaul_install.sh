@@ -75,11 +75,11 @@ DOWNLOADED_FILENAME="" # To store the name of the downloaded .tar.gz file
 
 if [[ "$ARCH" == "x86_64" ]]; then
     echo "Detected x86_64 architecture. Downloading from https://github.com/amirmbn/Backhaul-Installer/releases/download/v0.6.5/backhaul_linux_amd64.tar.gz"
-    DOWNLOAD_URL="https://github.com/amirmbn/Backhaul-Installer/releases/download/v0.6.5/backhaul_linux_amd64.tar.gz"
+    DOWNLOAD_URL="https://github.com/amirmbn/Backhaul-Installer/releases/download/v0.7.2/backhaul_linux_amd64.tar.gz"
     DOWNLOADED_FILENAME="backhaul_linux_amd64.tar.gz"
 elif [[ "$ARCH" == "aarch64" || "$ARCH" == "armv7l" || "$ARCH" == "armv8l" ]]; then
     echo "Detected ARM architecture. Downloading from https://github.com/amirmbn/Backhaul-Installer/releases/download/v0.6.5/backhaul_linux_arm64.tar.gz"
-    DOWNLOAD_URL="https://github.com/amirmbn/Backhaul-Installer/releases/download/v0.6.5/backhaul_linux_arm64.tar.gz"
+    DOWNLOAD_URL="https://github.com/amirmbn/Backhaul-Installer/releases/download/v0.7.2/backhaul_linux_arm64.tar.gz"
     DOWNLOADED_FILENAME="backhaul_linux_arm64.tar.gz"
 else
     echo "Unsupported architecture: $ARCH. Please download Backhaul manually."
