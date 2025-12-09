@@ -153,9 +153,9 @@ esac
 echo "---"
 
 clear # Clear screen before mode selection
-echo "Select Mode (IRAN or OutSide):"
+echo "Select Mode:"
 echo "1. IRAN"
-echo "2. OutSide"
+echo "2. Kharej"
 echo ""
 
 read -rp "Please enter the number: " mode_choice
