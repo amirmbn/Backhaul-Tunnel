@@ -51,216 +51,35 @@ get_port_input() {
 
 # --- Check Processor Architecture and Download Backhaul ---
 clear # Clear screen before initial messages
-echo "Detecting processor architecture and downloading latest Backhaul..."
+echo "Detecting processor architecture and downloading Backhaul..."
 
 ARCH=$(uname -m)
-OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 DOWNLOAD_URL=""
-DOWNLOADED_FILENAME=""
+DOWNLOADED_FILENAME="" # To store the name of the downloaded .tar.gz file
 
-# Function to install curl if not available
-install_curl_if_needed() {
-    if ! command -v curl &> /dev/null; then
-        echo "curl not found. Attempting to install..."
-        
-        # Detect package manager and install curl
-        if command -v apt-get &> /dev/null; then
-            # Debian/Ubuntu
-            apt-get update && apt-get install -y curl
-        elif command -v yum &> /dev/null; then
-            # RHEL/CentOS
-            yum install -y curl
-        elif command -v dnf &> /dev/null; then
-            # Fedora
-            dnf install -y curl
-        elif command -v apk &> /dev/null; then
-            # Alpine
-            apk add curl
-        elif command -v pacman &> /dev/null; then
-            # Arch Linux
-            pacman -Sy --noconfirm curl
-        elif command -v zypper &> /dev/null; then
-            # openSUSE
-            zypper install -y curl
-        else
-            echo "Error: Could not detect package manager to install curl."
-            echo "Please install curl manually and run the script again."
-            exit 1
-        fi
-        
-        # Verify installation
-        if command -v curl &> /dev/null; then
-            echo "curl installed successfully."
-        else
-            echo "Failed to install curl. Trying wget instead..."
-        fi
-    fi
-}
-
-# Function to install wget if not available
-install_wget_if_needed() {
-    if ! command -v wget &> /dev/null; then
-        echo "wget not found. Attempting to install..."
-        
-        # Detect package manager and install wget
-        if command -v apt-get &> /dev/null; then
-            # Debian/Ubuntu
-            apt-get update && apt-get install -y wget
-        elif command -v yum &> /dev/null; then
-            # RHEL/CentOS
-            yum install -y wget
-        elif command -v dnf &> /dev/null; then
-            # Fedora
-            dnf install -y wget
-        elif command -v apk &> /dev/null; then
-            # Alpine
-            apk add wget
-        elif command -v pacman &> /dev/null; then
-            # Arch Linux
-            pacman -Sy --noconfirm wget
-        elif command -v zypper &> /dev/null; then
-            # openSUSE
-            zypper install -y wget
-        else
-            echo "Error: Could not detect package manager to install wget."
-            echo "Please install wget manually and run the script again."
-            exit 1
-        fi
-        
-        # Verify installation
-        if command -v wget &> /dev/null; then
-            echo "wget installed successfully."
-        else
-            echo "Failed to install wget."
-        fi
-    fi
-}
-
-# Ensure at least one download tool is available
-install_curl_if_needed
-if ! command -v curl &> /dev/null; then
-    install_wget_if_needed
-fi
-
-# Check if any download tool is available
-if ! command -v curl &> /dev/null && ! command -v wget &> /dev/null; then
-    echo "Error: Neither curl nor wget is available and could not be installed."
-    echo "Please install one of them manually and run the script again."
+if [[ "$ARCH" == "x86_64" ]]; then
+    echo "Detected x86_64 architecture. Downloading from https://github.com/amirmbn/Backhaul-Installer/releases/download/v0.6.5/backhaul_linux_amd64.tar.gz"
+    DOWNLOAD_URL="https://github.com/amirmbn/Backhaul-Installer/releases/download/v0.6.5/backhaul_linux_amd64.tar.gz"
+    DOWNLOADED_FILENAME="backhaul_linux_amd64.tar.gz"
+elif [[ "$ARCH" == "aarch64" || "$ARCH" == "armv7l" || "$ARCH" == "armv8l" ]]; then
+    echo "Detected ARM architecture. Downloading from https://github.com/amirmbn/Backhaul-Installer/releases/download/v0.6.5/backhaul_linux_arm64.tar.gz"
+    DOWNLOAD_URL="https://github.com/amirmbn/Backhaul-Installer/releases/download/v0.6.5/backhaul_linux_arm64.tar.gz"
+    DOWNLOADED_FILENAME="backhaul_linux_arm64.tar.gz"
+else
+    echo "Unsupported architecture: $ARCH. Please download Backhaul manually."
     exit 1
 fi
 
-# Function to get latest version from GitHub API with fallback
-get_latest_version() {
-    local version
-    
-    # Try using curl first
-    if command -v curl &> /dev/null; then
-        echo "Using curl to fetch latest version..."
-        version=$(curl -s --connect-timeout 10 --retry 3 https://api.github.com/repos/amirmbn/Backhaul-Installer/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
-    # Fallback to wget
-    elif command -v wget &> /dev/null; then
-        echo "Using wget to fetch latest version..."
-        version=$(wget -qO- --timeout=10 --tries=3 https://api.github.com/repos/amirmbn/Backhaul-Installer/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
-    fi
-    
-    # Validate version format
-    if [ -z "$version" ] || [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-        echo "Warning: Could not fetch latest version. Using fallback method..."
-        # Try alternative method - scrape from releases page
-        if command -v curl &> /dev/null; then
-            version=$(curl -s https://github.com/amirmbn/Backhaul-Installer/releases | grep -oE 'releases/tag/v[0-9]+\.[0-9]+\.[0-9]+' | head -1 | sed 's/releases\/tag\/v//')
-        elif command -v wget &> /dev/null; then
-            version=$(wget -qO- https://github.com/amirmbn/Backhaul-Installer/releases | grep -oE 'releases/tag/v[0-9]+\.[0-9]+\.[0-9]+' | head -1 | sed 's/releases\/tag\/v//')
-        fi
-        
-        # Final fallback
-        if [ -z "$version" ] || [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            echo "Warning: Could not determine latest version. Using fallback version 0.6.5"
-            version="0.6.5"
-        fi
-    fi
-    
-    echo "$version"
-}
-
-echo "Fetching latest version from GitHub..."
-LATEST_VERSION=$(get_latest_version)
-echo "Latest version found: v$LATEST_VERSION"
-
-# Determine the correct filename based on architecture and OS
-case "$OS" in
-    "linux")
-        case "$ARCH" in
-            "x86_64")
-                echo "Detected Linux x86_64 architecture."
-                DOWNLOADED_FILENAME="backhaul_linux_amd64.tar.gz"
-                ;;
-            "aarch64"|"armv8l"|"armv8"|"arm64")
-                echo "Detected Linux ARM64 architecture."
-                DOWNLOADED_FILENAME="backhaul_linux_arm64.tar.gz"
-                ;;
-            "armv7l"|"armv7")
-                echo "Detected Linux ARMv7 architecture."
-                # Most ARMv7 systems can run ARM64 binaries, but if specific ARMv7 binary exists:
-                DOWNLOADED_FILENAME="backhaul_linux_arm64.tar.gz"
-                echo "Note: Using ARM64 binary for ARMv7 (compatibility mode)"
-                ;;
-            *)
-                echo "Unsupported Linux architecture: $ARCH"
-                echo "Supported architectures: x86_64, aarch64, armv7l, armv8l"
-                exit 1
-                ;;
-        esac
-        ;;
-    "darwin")
-        case "$ARCH" in
-            "x86_64")
-                echo "Detected macOS Intel (x86_64) architecture."
-                DOWNLOADED_FILENAME="backhaul_darwin_amd64.tar.gz"
-                ;;
-            "arm64"|"aarch64")
-                echo "Detected macOS Apple Silicon (ARM64) architecture."
-                DOWNLOADED_FILENAME="backhaul_darwin_arm64.tar.gz"
-                ;;
-            *)
-                echo "Unsupported macOS architecture: $ARCH"
-                echo "Supported architectures: x86_64, arm64"
-                exit 1
-                ;;
-        esac
-        ;;
-    *)
-        echo "Unsupported operating system: $OS"
-        echo "Supported systems: Linux, macOS"
-        exit 1
-        ;;
-esac
-
-# Construct download URL
-DOWNLOAD_URL="https://github.com/amirmbn/Backhaul-Installer/releases/download/v${LATEST_VERSION}/${DOWNLOADED_FILENAME}"
-echo "Download URL: $DOWNLOAD_URL"
-
 # Define the full path for the downloaded tar.gz file
-DOWNLOAD_PATH="/tmp/$DOWNLOADED_FILENAME"
+DOWNLOAD_PATH="/tmp/$DOWNLOADED_FILENAME" # Using /tmp for temporary storage
 
 # Download, extract, and clean up
 if [ -n "$DOWNLOAD_URL" ]; then
     echo "Downloading $DOWNLOADED_FILENAME..."
-    
-    # Check download tool availability and use the best option
-    if command -v curl &> /dev/null; then
-        echo "Using curl for download..."
-        curl -L --progress-bar --connect-timeout 30 --retry 3 -o "$DOWNLOAD_PATH" "$DOWNLOAD_URL"
-    elif command -v wget &> /dev/null; then
-        echo "Using wget for download..."
-        wget -q --show-progress --timeout=30 --tries=3 -O "$DOWNLOAD_PATH" "$DOWNLOAD_URL"
-    else
-        echo "Error: No download tool available. This should not happen."
-        exit 1
-    fi
+    wget -q --show-progress -O "$DOWNLOAD_PATH" "$DOWNLOAD_URL"
     
     if [ $? -eq 0 ]; then
-        echo "Download complete. Extracting $DOWNLOADED_FILENAME..."
+        echo "Download complete. Extracting $DOWNLOAD_FILENAME..."
         # Extract the contents of the tar.gz file to the current directory
         tar -xzf "$DOWNLOAD_PATH"
         
@@ -270,19 +89,16 @@ if [ -n "$DOWNLOAD_URL" ]; then
             
             if [ -f "backhaul" ]; then
                 chmod +x "backhaul"
-                echo "Backhaul v$LATEST_VERSION extracted and made executable successfully."
+                echo "Backhaul extracted and made executable successfully."
             else
                 echo "Warning: 'backhaul' executable not found after extraction. Please check the contents of the tar.gz file."
-                echo "Files extracted:"
-                ls -la
             fi
         else
-            echo "Failed to extract $DOWNLOADED_FILENAME."
+            echo "Failed to extract $DOWNLOAD_FILENAME."
             exit 1
         fi
     else
         echo "Failed to download Backhaul. Please check the URL or your network connection."
-        echo "You can manually download from: $DOWNLOAD_URL"
         exit 1
     fi
 else
@@ -803,5 +619,4 @@ echo "Systemd service file created at $SERVICE_FILE"
 sudo systemctl daemon-reload
 sudo systemctl enable backhaul.service
 sudo systemctl start backhaul.service
-
 sudo systemctl status backhaul.service
