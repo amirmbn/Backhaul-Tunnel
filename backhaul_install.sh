@@ -174,7 +174,7 @@ if [[ "$MODE" == "server" ]]; then
 
     case "$TRANSPORT" in
         "tcp")
-            BIND_ADDR=$(get_input_with_default "Bind address and port (bind_addr)" "0.0.0.0:3080")
+            BIND_ADDR=$(get_bind_addr_from_port "Enter bind port" "3080")
             echo "bind_addr = \"$BIND_ADDR\"" >> "$CONFIG_FILE"
             echo "transport = \"$TRANSPORT\"" >> "$CONFIG_FILE"
             ACCEPT_UDP=$(get_boolean_input "Accept UDP? (true/false)" "false")
