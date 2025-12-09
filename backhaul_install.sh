@@ -74,12 +74,12 @@ DOWNLOAD_URL=""
 DOWNLOADED_FILENAME="" # To store the name of the downloaded .tar.gz file
 
 if [[ "$ARCH" == "x86_64" ]]; then
-    echo "Detected x86_64 architecture. Downloading from https://github.com/amirmbn/Backhaul-Installer/releases/download/v0.7.2/backhaul_linux_amd64.tar.gz"
-    DOWNLOAD_URL="https://github.com/amirmbn/Backhaul-Installer/releases/download/v0.7.2/backhaul_linux_amd64.tar.gz"
+    echo "Detected x86_64 architecture. Downloading from https://github.com/amirmbn/Backhaul-Installer/releases/download/v0.6.5/backhaul_linux_amd64.tar.gz"
+    DOWNLOAD_URL="https://github.com/amirmbn/Backhaul-Installer/releases/download/v0.6.5/backhaul_linux_amd64.tar.gz"
     DOWNLOADED_FILENAME="backhaul_linux_amd64.tar.gz"
 elif [[ "$ARCH" == "aarch64" || "$ARCH" == "armv7l" || "$ARCH" == "armv8l" ]]; then
-    echo "Detected ARM architecture. Downloading from https://github.com/amirmbn/Backhaul-Installer/releases/download/v0.7.2/backhaul_linux_arm64.tar.gz"
-    DOWNLOAD_URL="https://github.com/amirmbn/Backhaul-Installer/releases/download/v0.7.2/backhaul_linux_arm64.tar.gz"
+    echo "Detected ARM architecture. Downloading from https://github.com/amirmbn/Backhaul-Installer/releases/download/v0.6.5/backhaul_linux_arm64.tar.gz"
+    DOWNLOAD_URL="https://github.com/amirmbn/Backhaul-Installer/releases/download/v0.6.5/backhaul_linux_arm64.tar.gz"
     DOWNLOADED_FILENAME="backhaul_linux_arm64.tar.gz"
 else
     echo "Unsupported architecture: $ARCH. Please download Backhaul manually."
@@ -153,7 +153,7 @@ echo "---"
 
 clear # Clear screen before mode selection
 echo "Select Mode (Server or Client):"
-echo "1. Server (IRAN)"
+echo "1. Server"
 echo "2. Client"
 
 read -rp "Please enter the number of your desired option: " mode_choice
@@ -174,8 +174,8 @@ if [[ "$MODE" == "server" ]]; then
 
     case "$TRANSPORT" in
         "tcp")
-            BIND_ADDR=$(get_input_with_default "Enter the tunnel port " "Default 3080")
-            echo "bind_addr = \"0.0.0.0\"" >> "$CONFIG_FILE"
+            BIND_ADDR=$(get_input_with_default "Bind address and port (bind_addr)" "0.0.0.0:3080")
+            echo "bind_addr = \"$BIND_ADDR\"" >> "$CONFIG_FILE"
             echo "transport = \"$TRANSPORT\"" >> "$CONFIG_FILE"
             ACCEPT_UDP=$(get_boolean_input "Accept UDP? (true/false)" "false")
             echo "accept_udp = $ACCEPT_UDP" >> "$CONFIG_FILE"
@@ -201,7 +201,7 @@ if [[ "$MODE" == "server" ]]; then
             echo "ports = $PORTS" >> "$CONFIG_FILE"
             ;;
         "tcpmux")
-            BIND_ADDR=$(get_input_with_default "Enter the tunnel port " "Default 3080")
+            BIND_ADDR=$(get_input_with_default "Bind address and port (bind_addr)" "0.0.0.0:3080")
             echo "bind_addr = \"$BIND_ADDR\"" >> "$CONFIG_FILE"
             echo "transport = \"$TRANSPORT\"" >> "$CONFIG_FILE"
             TOKEN=$(get_input_with_default "Token (token)" "your_token")
@@ -236,7 +236,7 @@ if [[ "$MODE" == "server" ]]; then
             echo "ports = $PORTS" >> "$CONFIG_FILE"
             ;;
         "udp")
-            BIND_ADDR=$(get_input_with_default "Enter the tunnel port " "Default 3080")
+            BIND_ADDR=$(get_input_with_default "Bind address and port (bind_addr)" "0.0.0.0:3080")
             echo "bind_addr = \"$BIND_ADDR\"" >> "$CONFIG_FILE"
             echo "transport = \"$TRANSPORT\"" >> "$CONFIG_FILE"
             TOKEN=$(get_input_with_default "Token (token)" "your_token")
@@ -257,7 +257,7 @@ if [[ "$MODE" == "server" ]]; then
             echo "ports = $PORTS" >> "$CONFIG_FILE"
             ;;
         "ws")
-            BIND_ADDR=$(get_input_with_default "Enter the tunnel port " "Default 8080")
+            BIND_ADDR=$(get_input_with_default "Bind address and port (bind_addr)" "0.0.0.0:8080")
             echo "bind_addr = \"$BIND_ADDR\"" >> "$CONFIG_FILE"
             echo "transport = \"$TRANSPORT\"" >> "$CONFIG_FILE"
             TOKEN=$(get_input_with_default "Token (token)" "your_token")
@@ -282,7 +282,7 @@ if [[ "$MODE" == "server" ]]; then
             echo "ports = $PORTS" >> "$CONFIG_FILE"
             ;;
         "wss")
-            BIND_ADDR=$(get_input_with_default "Enter the tunnel port " "Default 8443")
+            BIND_ADDR=$(get_input_with_default "Bind address and port (bind_addr)" "0.0.0.0:8443")
             echo "bind_addr = \"$BIND_ADDR\"" >> "$CONFIG_FILE"
             echo "transport = \"$TRANSPORT\"" >> "$CONFIG_FILE"
             TOKEN=$(get_input_with_default "Token (token)" "your_token")
@@ -309,7 +309,7 @@ if [[ "$MODE" == "server" ]]; then
             echo "ports = $PORTS" >> "$CONFIG_FILE"
             ;;
         "wsmux")
-            BIND_ADDR=$(get_input_with_default "Enter the tunnel port " "Default 3080")
+            BIND_ADDR=$(get_input_with_default "Bind address and port (bind_addr)" "0.0.0.0:3080")
             echo "bind_addr = \"$BIND_ADDR\"" >> "$CONFIG_FILE"
             echo "transport = \"$TRANSPORT\"" >> "$CONFIG_FILE"
             TOKEN=$(get_input_with_default "Token (token)" "your_token")
@@ -344,7 +344,7 @@ if [[ "$MODE" == "server" ]]; then
             echo "ports = $PORTS" >> "$CONFIG_FILE"
             ;;
         "wssmux")
-            BIND_ADDR=$(get_input_with_default "Enter the tunnel port " "Default 443")
+            BIND_ADDR=$(get_input_with_default "Bind address and port (bind_addr)" "0.0.0.0:443")
             echo "bind_addr = \"$BIND_ADDR\"" >> "$CONFIG_FILE"
             echo "transport = \"$TRANSPORT\"" >> "$CONFIG_FILE"
             TOKEN=$(get_input_with_default "Token (token)" "your_token")
@@ -635,4 +635,5 @@ echo "Systemd service file created at $SERVICE_FILE"
 sudo systemctl daemon-reload
 sudo systemctl enable backhaul.service
 sudo systemctl start backhaul.service
+
 sudo systemctl status backhaul.service
