@@ -44,7 +44,7 @@ journalctl -u backhaul.service -e -f
 </div>
 <div align="right">
 <br>
- - توقف و پاک‌سازی کامل تانل از روی سرور اوبونتو
+ - توقف و حذف کامل تانل از روی سرور اوبونتو
 <br><br>
 </div>
 <div align="left">
