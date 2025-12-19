@@ -43,6 +43,17 @@ journalctl -u backhaul.service -e -f
 ```
 </div>
 <div align="right">
+<br>
+ - حذف کامل تانل از روی سرور
 <br><br>
-<a href="https://github.com/Musixal/Backhaul" target="_blank">سورس اصلی پروژه</a>
+</div>
+<div align="left">
+
+```
+sudo systemctl stop backhaul
+sudo systemctl disable backhaul
+sudo rm -f /etc/systemd/system/backhaul.service
+sudo systemctl daemon-reload
+sudo rm -f /root/backhaul /root/config.toml /root/backhaul.json backhaul_install.sh
+```
 </div>
