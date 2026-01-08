@@ -56,6 +56,30 @@ sudo systemctl status backhaul.service
 </div>
 <div align="right">
 <br>
+###▶️ راه‌اندازی مجدد سرویس (Start / Restart)
+<br>
+شروع مجدد:
+<br><br>
+</div>
+<div align="left">
+
+```
+sudo systemctl start backhaul.service
+```
+</div>
+<div align="right">
+<br>
+ - ری‌استارت (بعد از تغییر تنظیمات حتماً از این استفاده کن):
+<br><br>
+</div>
+<div align="left">
+
+```
+sudo systemctl restart backhaul.service
+```
+</div>
+<div align="right">
+<br>
  - توقف و حذف کامل تانل از روی سرور اوبونتو
 <br><br>
 </div>
