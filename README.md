@@ -44,6 +44,18 @@ journalctl -u backhaul.service -e -f
 </div>
 <div align="right">
 <br>
+ - ⛔ متوقف کردن سرویس
+<br><br>
+</div>
+<div align="left">
+
+```
+sudo systemctl stop backhaul.service
+sudo systemctl status backhaul.service
+```
+</div>
+<div align="right">
+<br>
  - توقف و حذف کامل تانل از روی سرور اوبونتو
 <br><br>
 </div>
