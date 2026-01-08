@@ -45,7 +45,7 @@ journalctl -u backhaul.service -e -f
 <div align="right">
 <br>
 
-## راه‌اندازی مجدد سرویس (Start / Restart)
+## نوقف و راه‌اندازی مجدد سرویس
 <br>
  - ⛔ متوقف کردن سرویس
 <br><br>
@@ -60,7 +60,7 @@ sudo systemctl status backhaul.service
 <div align="right">
 <br>
 
-- شروع مجدد:
+ - شروع مجدد:
 <br><br>
 </div>
 <div align="left">
