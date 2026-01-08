@@ -103,7 +103,7 @@ sudo rm -f /etc/systemd/system/backhaul.service
 sudo systemctl daemon-reload
 sudo rm -f /root/backhaul /root/config.toml /root/backhaul.json backhaul_install.sh
 ```
-</div>
+</div><br>
 
 ## 💰 Support This Project with Crypto
 [![Donate BTC](https://img.shields.io/badge/Donate-BTC-orange)](https://www.blockchain.com/btc/address/bc1qul4v4rudyl7lacekfp8yda5sc5575mh2tzv9au)
