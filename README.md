@@ -63,7 +63,7 @@ sudo systemctl stop backhaul.service
 <div align="right">
 <br>
   
-مشاهده وضعیت تانل
+مشاهده وضعیت سرویس
 <br>
 </div>
 <div align="left">
