@@ -58,7 +58,7 @@ sudo systemctl status backhaul.service
 <br>
   
 ### راه‌اندازی مجدد سرویس (Start / Restart)
-<br><br>
+<br>
 شروع مجدد:
 <br><br>
 </div>
