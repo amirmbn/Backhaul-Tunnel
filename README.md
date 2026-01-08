@@ -2,7 +2,7 @@
 <br>
 
 <div align="right">
- - تست و بررسی‌های پروژه انجام شده و قابل بهره‌برداری است.
+ تست و بررسی‌های پروژه انجام شده و قابل بهره‌برداری است.
 </div>
 <div align="left">
 
@@ -11,7 +11,7 @@
 </div>
 <div align="right">
 <br>
- - کد زیر را در سرور اوبونتو خود Past کنید
+ کد زیر را در سرور اوبونتو خود Past کنید
 <br>
 </div>
 <div align="left">
@@ -22,7 +22,7 @@ sudo wget -4 https://raw.githubusercontent.com/amirmbn/Backhaul-Installer/main/b
 </div>
 <div align="right">
 <br>
- - برای بررسی وضعیت سرویس از کد زیر استفاده کنید
+ برای بررسی وضعیت سرویس از کد زیر استفاده کنید
 <br>
 </div>
 <div align="left">
@@ -33,7 +33,7 @@ sudo systemctl status backhaul.service
 </div>
 <div align="right">
 <br>
- - برای بررسی آخرین لاگ های backhaul از کد زیر استفاده کنید
+ برای بررسی آخرین لاگ های backhaul از کد زیر استفاده کنید
 <br>
 </div>
 <div align="left">
@@ -47,7 +47,7 @@ journalctl -u backhaul.service -e -f
 
 ## توقف و راه‌اندازی مجدد سرویس
 <br>
- - ⛔ متوقف کردن سرویس
+ ⛔ متوقف کردن سرویس
 <br>
 </div>
 <div align="left">
@@ -59,7 +59,7 @@ sudo systemctl status backhaul.service
 </div>
 <div align="right">
 <br>
- - شروع مجدد
+ شروع مجدد
 <br>
 </div>
 <div align="left">
@@ -70,7 +70,7 @@ sudo systemctl start backhaul.service
 </div>
 <div align="right">
 <br>
- - ری‌استارت (بعد از تغییر تنظیمات حتماً از این استفاده کن):
+ ری‌استارت (بعد از تغییر تنظیمات حتماً از این استفاده کن):
 <br>
 </div>
 <div align="left">
@@ -83,7 +83,7 @@ sudo systemctl restart backhaul.service
 ##
 <div align="right">
 <br>
- - توقف و حذف کامل تانل از روی سرور اوبونتو
+ توقف و حذف کامل تانل از روی سرور اوبونتو
 <br><br>
 </div>
 <div align="left">
