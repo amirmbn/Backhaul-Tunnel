@@ -45,7 +45,7 @@ journalctl -u backhaul.service -e -f
 <div align="right">
 <br>
 
-## نوقف و راه‌اندازی مجدد سرویس
+## توقف و راه‌اندازی مجدد سرویس
 <br>
  - ⛔ متوقف کردن سرویس
 <br><br>
