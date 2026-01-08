@@ -89,9 +89,10 @@ sudo systemctl restart backhaul.service
 ##
 <div align="right">
 <br>
+
   
 توقف و حذف کامل تانل از روی سرور اوبونتو
-<br><br>
+<br>
 </div>
 <div align="left">
 
