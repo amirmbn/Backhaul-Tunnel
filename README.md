@@ -12,7 +12,7 @@
 <div align="right">
 <br>
  - کد زیر را در سرور اوبونتو خود Past کنید
-<br><br>
+<br>
 </div>
 <div align="left">
 
@@ -23,7 +23,7 @@ sudo wget -4 https://raw.githubusercontent.com/amirmbn/Backhaul-Installer/main/b
 <div align="right">
 <br>
  - برای بررسی وضعیت سرویس از کد زیر استفاده کنید
-<br><br>
+<br>
 </div>
 <div align="left">
 
@@ -34,7 +34,7 @@ sudo systemctl status backhaul.service
 <div align="right">
 <br>
  - برای بررسی آخرین لاگ های backhaul از کد زیر استفاده کنید
-<br><br>
+<br>
 </div>
 <div align="left">
 
@@ -48,7 +48,7 @@ journalctl -u backhaul.service -e -f
 ## توقف و راه‌اندازی مجدد سرویس
 <br>
  - ⛔ متوقف کردن سرویس
-<br><br>
+<br>
 </div>
 <div align="left">
 
@@ -61,7 +61,7 @@ sudo systemctl status backhaul.service
 <br>
 
  - شروع مجدد:
-<br><br>
+<br>
 </div>
 <div align="left">
 
@@ -72,7 +72,7 @@ sudo systemctl start backhaul.service
 <div align="right">
 <br>
  - ری‌استارت (بعد از تغییر تنظیمات حتماً از این استفاده کن):
-<br><br>
+<br>
 </div>
 <div align="left">
 
