@@ -58,6 +58,17 @@ journalctl -u backhaul.service -e -f
 
 ```
 sudo systemctl stop backhaul.service
+```
+</div>
+<div align="right">
+<br>
+  
+مشاهده وضعیت تانل
+<br>
+</div>
+<div align="left">
+
+```
 sudo systemctl status backhaul.service
 ```
 </div>
