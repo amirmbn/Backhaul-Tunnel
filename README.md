@@ -60,7 +60,7 @@ sudo systemctl status backhaul.service
 <div align="right">
 <br>
 
- - شروع مجدد:
+ - ⛔ شروع مجدد
 <br>
 </div>
 <div align="left">
