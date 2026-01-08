@@ -11,6 +11,7 @@
 </div>
 <div align="right">
 <br>
+  
 کد زیر را در سرور اوبونتو خود Past کنید
 <br>
 </div>
@@ -34,6 +35,7 @@ sudo systemctl status backhaul.service
 </div>
 <div align="right">
 <br>
+  
 برای بررسی آخرین لاگ های backhaul از کد زیر استفاده کنید
 <br>
 </div>
@@ -48,6 +50,7 @@ journalctl -u backhaul.service -e -f
 
 ## توقف و راه‌اندازی مجدد سرویس
 <br>
+
 ⛔ متوقف کردن سرویس
 <br>
 </div>
@@ -60,6 +63,7 @@ sudo systemctl status backhaul.service
 </div>
 <div align="right">
 <br>
+  
 شروع مجدد
 <br>
 </div>
@@ -71,6 +75,7 @@ sudo systemctl start backhaul.service
 </div>
 <div align="right">
 <br>
+  
 ری‌استارت (بعد از تغییر تنظیمات حتماً از این استفاده کن):
 <br>
 </div>
@@ -84,6 +89,7 @@ sudo systemctl restart backhaul.service
 ##
 <div align="right">
 <br>
+  
 توقف و حذف کامل تانل از روی سرور اوبونتو
 <br><br>
 </div>
