@@ -57,7 +57,8 @@ journalctl -u backhaul.service -e -f
 <div align="left">
 
 ```
-sudo systemctl stop backhaul.service
+systemctl stop backhaul.service
+systemctl disable backhaul.service
 ```
 </div>
 <div align="right">
@@ -81,7 +82,8 @@ sudo systemctl status backhaul.service
 <div align="left">
 
 ```
-sudo systemctl start backhaul.service
+systemctl enable backhaul.service
+systemctl start backhaul.service
 ```
 </div>
 <div align="right">
