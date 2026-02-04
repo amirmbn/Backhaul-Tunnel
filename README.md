@@ -95,7 +95,7 @@ systemctl start backhaul.service
 <div align="left">
 
 ```
-sudo systemctl restart backhaul.service
+systemctl restart backhaul
 ```
 </div>
 
