@@ -1,6 +1,11 @@
 # Backhaul Installer
 <br>
 
+
+![GitHub Downloads](https://img.shields.io/github/downloads/amirmbn/Backhaul-Tunnel/total?style=flat-square&label=Total%20Downloads&color=blue)
+
+
+
 <div align="right">
 تست و بررسی‌های پروژه انجام شده و قابل بهره‌برداری است.
 </div>
