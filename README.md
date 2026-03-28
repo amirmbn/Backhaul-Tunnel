@@ -30,7 +30,7 @@ sudo wget -4 https://raw.githubusercontent.com/amirmbn/Backhaul-Installer/main/b
 <div align="left">
 
 ```
-sudo systemctl status backhaul.service
+sudo systemctl status backhaul
 ```
 </div>
 <div align="right">
@@ -42,7 +42,7 @@ sudo systemctl status backhaul.service
 <div align="left">
 
 ```
-journalctl -u backhaul.service -e -f
+journalctl -u backhaul -e -f
 ```
 </div>
 <div align="right">
@@ -57,8 +57,8 @@ journalctl -u backhaul.service -e -f
 <div align="left">
 
 ```
-systemctl stop backhaul.service
-systemctl disable backhaul.service
+systemctl stop backhaul
+systemctl disable backhaul
 ```
 </div>
 <div align="right">
@@ -70,7 +70,7 @@ systemctl disable backhaul.service
 <div align="left">
 
 ```
-sudo systemctl status backhaul.service
+sudo systemctl status backhaul
 ```
 </div>
 <div align="right">
@@ -82,8 +82,8 @@ sudo systemctl status backhaul.service
 <div align="left">
 
 ```
-systemctl enable backhaul.service
-systemctl start backhaul.service
+systemctl enable backhaul
+systemctl start backhaul
 ```
 </div>
 <div align="right">
@@ -95,7 +95,7 @@ systemctl start backhaul.service
 <div align="left">
 
 ```
-sudo systemctl restart backhaul.service
+sudo systemctl restart backhaul
 ```
 </div>
 
