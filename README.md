@@ -1,4 +1,4 @@
-# Backhaul Installer ![GitHub Downloads](https://img.shields.io/github/downloads/amirmbn/Backhaul-Tunnel/total?style=flat-square&label=Total%20Downloads&color=blue&cacheSeconds=3600)
+# Backhaul Installer ![GitHub Downloads](https://img.shields.io/badge/Total%20Downloads-?style=flat-square&label=Total%20Downloads&color=blue)
 <br>
 
 <div align="right">
