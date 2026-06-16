@@ -1,4 +1,4 @@
-# Backhaul Installer ![GitHub Downloads](https://img.shields.io/github/downloads/amirmbn/Backhaul-Installer/total?style=flat-square)
+# Backhaul Installer ![GitHub Downloads](https://img.shields.io/github/downloads/amirmbn/Backhaul-Installer/total?style=flat-square&color=blue)
 <br>
 
 <div align="right">
