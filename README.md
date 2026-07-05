@@ -18,7 +18,7 @@
 <div align="left">
 
 ```
-sudo wget -4 https://raw.githubusercontent.com/amirmbn/Backhaul-Installer/main/backhaul_install.sh && sudo chmod +x backhaul_install.sh && sudo ./backhaul_install.sh
+bash <(curl -Ls https://raw.githubusercontent.com/amirmbn/Backhaul-Installer/main/backhaul_install.sh)
 ```
 </div>
 <div align="right">
