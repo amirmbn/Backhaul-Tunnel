@@ -73,14 +73,25 @@ ARCH=$(uname -m)
 DOWNLOAD_URL=""
 DOWNLOADED_FILENAME="" # To store the name of the downloaded .tar.gz file
 
+# Fetch the latest release tag from GitHub API
+REPO="amirmbn/Backhaul-Installer"
+LATEST_TAG=$(curl -s "https://api.github.com/repos/$REPO/releases/latest" | grep -m1 '"tag_name"' | sed -E 's/.*"tag_name": *"([^"]+)".*/\1/')
+
+if [[ -z "$LATEST_TAG" ]]; then
+    echo "Failed to fetch the latest release tag from GitHub. Please check your network connection."
+    exit 1
+fi
+
+echo "Latest release detected: $LATEST_TAG"
+
 if [[ "$ARCH" == "x86_64" ]]; then
-    echo "Detected x86_64 architecture. Downloading from https://github.com/amirmbn/Backhaul-Installer/releases/download/v0.7.2/backhaul_linux_amd64.tar.gz"
-    DOWNLOAD_URL="https://github.com/amirmbn/Backhaul-Installer/releases/download/v0.7.2/backhaul_linux_amd64.tar.gz"
     DOWNLOADED_FILENAME="backhaul_linux_amd64.tar.gz"
+    DOWNLOAD_URL="https://github.com/$REPO/releases/download/$LATEST_TAG/$DOWNLOADED_FILENAME"
+    echo "Detected x86_64 architecture. Downloading from $DOWNLOAD_URL"
 elif [[ "$ARCH" == "aarch64" || "$ARCH" == "armv7l" || "$ARCH" == "armv8l" ]]; then
-    echo "Detected ARM architecture. Downloading from https://github.com/amirmbn/Backhaul-Installer/releases/download/v0.7.2/backhaul_linux_arm64.tar.gz"
-    DOWNLOAD_URL="https://github.com/amirmbn/Backhaul-Installer/releases/download/v0.7.2/backhaul_linux_arm64.tar.gz"
     DOWNLOADED_FILENAME="backhaul_linux_arm64.tar.gz"
+    DOWNLOAD_URL="https://github.com/$REPO/releases/download/$LATEST_TAG/$DOWNLOADED_FILENAME"
+    echo "Detected ARM architecture. Downloading from $DOWNLOAD_URL"
 else
     echo "Unsupported architecture: $ARCH. Please download Backhaul manually."
     exit 1
@@ -95,7 +106,7 @@ if [ -n "$DOWNLOAD_URL" ]; then
     wget -q --show-progress -O "$DOWNLOAD_PATH" "$DOWNLOAD_URL"
     
     if [ $? -eq 0 ]; then
-        echo "Download complete. Extracting $DOWNLOAD_FILENAME..."
+        echo "Download complete. Extracting $DOWNLOADED_FILENAME..."
         # Extract the contents of the tar.gz file to the current directory
         tar -xzf "$DOWNLOAD_PATH"
         
