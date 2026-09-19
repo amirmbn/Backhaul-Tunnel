@@ -74,7 +74,7 @@ DOWNLOAD_URL=""
 DOWNLOADED_FILENAME="" # To store the name of the downloaded .tar.gz file
 
 # Fetch the latest release tag from GitHub API
-REPO="amirmbn/Backhaul-Installer"
+REPO="amirmbn/Backhaul-Tunnel"
 LATEST_TAG=$(curl -s "https://api.github.com/repos/$REPO/releases/latest" | grep -m1 '"tag_name"' | sed -E 's/.*"tag_name": *"([^"]+)".*/\1/')
 
 if [[ -z "$LATEST_TAG" ]]; then
