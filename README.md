@@ -18,7 +18,7 @@
 <div align="left">
 
 ```
-bash <(curl -Ls https://raw.githubusercontent.com/amirmbn/Backhaul-Installer/main/install.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/amirmbn/Backhaul-Tunnel/main/install.sh)
 ```
 </div>
 <div align="right">
